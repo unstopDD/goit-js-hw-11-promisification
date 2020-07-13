@@ -62,15 +62,20 @@ function ex03() {
         const canProcess = Math.random() > 0.3;
 
         if (canProcess) {
-          resolve([transaction.id, delay]);
+          resolve({
+            id: transaction.id,
+            delay: delay,
+          });
         }
         reject(transaction.id);
       }, delay);
     });
   };
 
-  const logSuccess = array => {
-    console.log(`Transaction ${array[0]} processed in ${array[1]}ms`);
+  const logSuccess = transaction => {
+    console.log(
+      `Transaction ${transaction.id} processed in ${transaction.delay}ms`,
+    );
   };
 
   const logError = id => {
